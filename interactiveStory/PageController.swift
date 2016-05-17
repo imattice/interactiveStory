@@ -33,6 +33,25 @@ class PageController: UIViewController {
         // Do any additional setup after loading the view.
         if let page = page {
             artwork.image = page.story.artwork
+            let attributedString = NSMutableAttributedString(string: page.story.text)
+            
+            let paragraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.lineSpacing = 10
+            
+            
+            attributedString.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: NSMakeRange(0, attributedString.length))
+            
+            storyLabel.attributedText = attributedString
+            
+            if let firstChoice = page.firstChoice {
+                firstChoiceButton.setTitle(firstChoice.title, forState: .Normal)
+            } else {
+                firstChoiceButton.setTitle("Another Adventure?", forState: .Normal)
+            }
+            
+            if let secondChoice = page.secondChoice {
+                secondChoiceButton.setTitle(secondChoice.title, forState: .Normal)
+            }
         }        
     }
 
@@ -51,7 +70,37 @@ class PageController: UIViewController {
             artwork.rightAnchor.constraintEqualToAnchor(view.rightAnchor),
             artwork.bottomAnchor.constraintEqualToAnchor(view.bottomAnchor),
             artwork.leftAnchor.constraintEqualToAnchor(view.leftAnchor),
-            ])
+        ])
+        
+        
+        view.addSubview(storyLabel)
+        storyLabel.translatesAutoresizingMaskIntoConstraints = false
+        storyLabel.numberOfLines = 0
+        
+        NSLayoutConstraint.activateConstraints([
+            storyLabel.leadingAnchor.constraintEqualToAnchor(view.leadingAnchor, constant: 16.0),
+            storyLabel.trailingAnchor.constraintEqualToAnchor(view.trailingAnchor, constant: -16.0),
+            storyLabel.topAnchor.constraintEqualToAnchor(view.centerYAnchor, constant: -48.0),
+        ])
+        
+        
+        view.addSubview(firstChoiceButton)
+        firstChoiceButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activateConstraints([
+            firstChoiceButton.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor),
+            firstChoiceButton.bottomAnchor.constraintEqualToAnchor(view.bottomAnchor, constant: -80.0)
+        ])
+        
+        
+        view.addSubview(secondChoiceButton)
+        secondChoiceButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activateConstraints([
+            secondChoiceButton.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor),
+            secondChoiceButton.bottomAnchor.constraintEqualToAnchor(view.bottomAnchor, constant: -32.0)
+            
+        ])
     }
 
 }
