@@ -94,7 +94,7 @@ extension Page {
 }
 
 struct Adventure {
-    static func story(name: String) -> Page {
+    static var story: Page {
         let returnTrip = Page(story: .ReturnTrip)
         
         let touchdown = returnTrip.addChoice("Stop and Investigate", story: .TouchDown)
