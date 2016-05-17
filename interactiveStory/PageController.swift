@@ -12,6 +12,11 @@ class PageController: UIViewController {
     
     var page: Page?
     
+    let artwork = UIImageView()
+    let storyLabel = UILabel()
+    let firstChoiceButton = UIButton(type: .System)
+    let secondChoiceButton = UIButton(type: .System)   
+    
     required init?(coder aDecoder: NSCoder) {
         //fatalError("init coder not implemented")
         super.init(coder: aDecoder)
@@ -27,7 +32,7 @@ class PageController: UIViewController {
 
         // Do any additional setup after loading the view.
         if let page = page {
-            print(page.story.text)
+            artwork.image = page.story.artwork
         }        
     }
 
@@ -37,14 +42,16 @@ class PageController: UIViewController {
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    override func viewWillLayoutSubviews() {
+        view.addSubview(artwork)
+        artwork.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activateConstraints([
+            artwork.topAnchor.constraintEqualToAnchor(view.topAnchor),
+            artwork.rightAnchor.constraintEqualToAnchor(view.rightAnchor),
+            artwork.bottomAnchor.constraintEqualToAnchor(view.bottomAnchor),
+            artwork.leftAnchor.constraintEqualToAnchor(view.leftAnchor),
+            ])
     }
-    */
 
 }
