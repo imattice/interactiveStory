@@ -49,7 +49,7 @@ class PageController: UIViewController {
                 firstChoiceButton.addTarget(self, action: #selector(PageController.loadFirstChoice), forControlEvents: .TouchUpInside)
             } else {
                 firstChoiceButton.setTitle("Another Adventure?", forState: .Normal)
-                firstChoiceButton.addTarget(self, action: #selector(PageController.playAgain), forControlEvents: <#T##UIControlEvents#>)
+                firstChoiceButton.addTarget(self, action: #selector(PageController.playAgain), forControlEvents: .TouchUpInside)
             }
             
             if let secondChoice = page.secondChoice {
